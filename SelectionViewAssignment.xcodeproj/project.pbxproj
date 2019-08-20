@@ -59,11 +59,11 @@
 			isa = PBXGroup;
 			children = (
 				22ED2CE3230A412F00B43443 /* AppDelegate.swift */,
-				22ED2CE7230A412F00B43443 /* Main.storyboard */,
 				22ED2CED230A413000B43443 /* Assets.xcassets */,
 				22ED2CEF230A413000B43443 /* LaunchScreen.storyboard */,
 				22ED2CF2230A413000B43443 /* Info.plist */,
 				22ED2CEA230A412F00B43443 /* SelectionViewAssignment.xcdatamodeld */,
+				22ED2CE7230A412F00B43443 /* Main.storyboard */,
 				22ED2CE5230A412F00B43443 /* ViewController.swift */,
 				22ED2CF8230A433B00B43443 /* SelectionViewProtocol.swift */,
 			);
@@ -291,6 +291,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CL27H452FX;
 				INFOPLIST_FILE = SelectionViewAssignment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -308,6 +309,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CL27H452FX;
 				INFOPLIST_FILE = SelectionViewAssignment/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

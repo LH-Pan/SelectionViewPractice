@@ -8,20 +8,33 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+class ViewController: UIViewController, SelectionViewDataSource, SelectionViewDelegate {
+    
+    var selectionView: SelectionView!
+    
+    let buttonTitle: [String] = ["123", "456"]
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        selectionView = SelectionView(frame: CGRect(x: 0, y: 60, width: UIScreen.main.bounds.width, height: 150))
+       
+        selectionView.backgroundColor = .brown
+        
+        selectionView.dataSource = self
+        
+        view.addSubview(selectionView)
+
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+  
+    
+    func textOfSelections(_ selectionView: SelectionView) -> String {
+        return "123"
     }
     
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 
 
 }
