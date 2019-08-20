@@ -11,6 +11,12 @@ import UIKit
 class SelectionView: UIView {
     
     weak var delegate: SelectionViewDelegate?
+//        {
+//
+//        didSet {
+//            addButton()
+//        }
+//    }
     
     weak var dataSource: SelectionViewDataSource? {
         
@@ -20,6 +26,8 @@ class SelectionView: UIView {
     }
     
     let indicatorView = UIView()
+    
+    var selectedIndex: Int = 0
     
     func addButton() {
         
@@ -33,19 +41,17 @@ class SelectionView: UIView {
             
             let button = UIButton()
             
-            button.tag = index + 1
+            button.tag = index
             
             button.frame = CGRect(x: btnWidth * CGFloat(index), y: 0, width: btnWidth, height: btnHeight)
             
-            button.setTitle(dataSource.textOfSelections(self), for: .normal)
+            button.setTitle(dataSource.textOfSelections(self, index: index), for: .normal)
             
             button.setTitleColor(dataSource.colorOfSelectionText(self), for: .normal)
             
             button.titleLabel?.font = dataSource.fontOfText(self)
             
             button.backgroundColor = .gray
-            
-            button.isEnabled = true
             
             self.addSubview(button)
             
@@ -64,9 +70,19 @@ class SelectionView: UIView {
     
     @objc func moveIndicatorView(_ sender: UIButton) {
         
+        selectedIndex = sender.tag
+        
+        guard let delegate = delegate else { return }
+        
+        if delegate.enable?(self, index: sender.tag) == true {
+        
         UIView.animate(withDuration: 0.2, animations: {
+            
             self.indicatorView.center.x = sender.center.x
         })
+        
+        delegate.didSelected?(self, index: sender.tag)
+        }
     }
 }
 
@@ -74,7 +90,7 @@ protocol SelectionViewDataSource: AnyObject {
     
     func numberOfSelections(_ selectionView: SelectionView) -> Int
     
-    func textOfSelections(_ selectionView: SelectionView) -> String
+    func textOfSelections(_ selectionView: SelectionView, index: Int) -> String
     
     func colorOfIndicatorView(_ selectionView: SelectionView) -> UIColor
     
@@ -85,9 +101,9 @@ protocol SelectionViewDataSource: AnyObject {
 
 @objc protocol SelectionViewDelegate: AnyObject {
     
-    @objc optional func isSelected() -> IndexPath
+    @objc optional func didSelected(_ selectionView: SelectionView, index: Int)
     
-    @objc optional func canBeChoose() -> Bool
+    @objc optional func enable(_ selectionView: SelectionView, index: Int) -> Bool
 }
 
 extension SelectionViewDataSource {
@@ -108,3 +124,4 @@ extension SelectionViewDataSource {
         return .systemFont(ofSize: 18)
     }
 }
+
